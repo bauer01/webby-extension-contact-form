@@ -2,6 +2,8 @@
 
 namespace Webby\Extensions\ContactForm;
 
+use Nette\DI\CompilerExtension;
+
 class Extension extends CompilerExtension
 {
 
