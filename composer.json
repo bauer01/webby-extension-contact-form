@@ -1,0 +1,26 @@
+{
+	"name": "webby/extension-contact-form",
+	"type": "webby-extension",
+	"description": "Contact form extension for Webby CMS",
+	"keywords": ["webby","plugin","extension","contact","form"],
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Bronislav Sedlák",
+			"homepage": "https://bronislavsedlak.com"
+		}
+	],
+	"require": {
+		"nette/mail": "^2.4",
+		"nette/forms": "^2.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"Webby\\Extensions\\ContactForm\\": "src/"
+		}
+	},
+	"config": {
+		"secure-http": false
+	},
+	"minimum-stability": "dev"
+}
