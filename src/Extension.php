@@ -7,7 +7,9 @@ use Nette\DI\CompilerExtension;
 class Extension extends CompilerExtension
 {
 
-    private $defaults = [];
+    private $defaults = [
+        "forms" => []
+    ];
 
     public function loadConfiguration()
     {
@@ -15,7 +17,12 @@ class Extension extends CompilerExtension
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix('factory'))
-            ->setClass(Factory::class);
+            ->setClass(
+                Factory::class,
+                [
+                    $config["forms"]
+                ]
+            );
 
     }
 
