@@ -32,7 +32,7 @@ class Factory
 
     public function create(DefaultPresenter $presenter, $link, $id, $particle)
     {
-        $form = new Form();
+        $form = new Form("contact-" . $id);
 
         $options = $this->forms[$id];
         $form->addText("email", $options["email"]["label"])
@@ -40,8 +40,10 @@ class Factory
             ->setRequired();
         $form->addText("phone", $options["phone"]["label"])
             ->setRequired();
-        $form->addTextArea("message", $options["message"]["label"])
-            ->setRequired();
+        if (!empty($options["message"])) {
+            $form->addTextArea("message", $options["message"]["label"])
+                ->setRequired();
+        }
         $form->addProtection($options["csrf"]);
         $form->addSubmit("send", $options["submit"]);
 
@@ -51,7 +53,7 @@ class Factory
                 $form->getValues()["email"],
                 $options["to"],
                 $options["subject"],
-                $form->getValues()["message"]
+                empty($form->getValues()["message"]) ? null : $form->getValues()["message"]
             );
 
             $this->message = $options["success"];
