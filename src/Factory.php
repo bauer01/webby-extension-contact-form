@@ -7,6 +7,7 @@ use Latte\Engine;
 use Nette\Forms\Form;
 use Nette\Mail\IMailer;
 use Nette\Mail\Message;
+use Tracy\Debugger;
 use Webby\Presenter\DefaultPresenter;
 
 class Factory
@@ -50,10 +51,12 @@ class Factory
         if ($form->isSuccess()) {
 
             $this->send(
+                $id,
                 $form->getValues()["email"],
                 $options["to"],
                 $options["subject"],
-                empty($form->getValues()["message"]) ? null : $form->getValues()["message"]
+                empty($form->getValues()["message"]) ? null : $form->getValues()["message"],
+                empty($form->getValues()["phone"]) ? null : $form->getValues()["phone"]
             );
 
             $this->message = $options["success"];
@@ -68,8 +71,10 @@ class Factory
         return $form;
     }
 
-    private function send($from, $to, $subject, $message)
+    private function send($id, $from, $to, $subject, $message, $phone)
     {
+        Debugger::log("Contact form - " . json_encode([$id, $from, $to, $subject, $message, $phone]), "mail");
+
         $latte = new Engine();
         $mail = new Message();
         $mail->setFrom($from)
@@ -79,7 +84,8 @@ class Factory
                 $latte->renderToString(
                     __DIR__ . '/templates/default.latte',
                     [
-                        "message" => $message
+                        "message" => $message,
+                        "phone" => $phone
                     ]
                 )
             );
