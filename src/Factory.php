@@ -62,7 +62,7 @@ class Factory
             $this->message = $options["success"];
 
             if ($presenter->isAjax()) {
-                $presenter->getParticles()->invalidate([$particle]);
+                $presenter->invalidate([$particle]);
             } else {
                 $presenter->redirect($link);
             }
