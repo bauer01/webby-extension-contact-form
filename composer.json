@@ -10,10 +10,6 @@
 			"homepage": "https://bronislavsedlak.com"
 		}
 	],
-	"require": {
-		"nette/mail": "^2.4",
-		"nette/forms": "^2.4"
-	},
 	"autoload": {
 		"psr-4": {
 			"Webby\\Extensions\\ContactForm\\": "src/"
