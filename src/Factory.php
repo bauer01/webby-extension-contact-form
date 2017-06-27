@@ -56,7 +56,8 @@ class Factory
                 $options["to"],
                 $options["subject"],
                 empty($form->getValues()["message"]) ? null : $form->getValues()["message"],
-                empty($form->getValues()["phone"]) ? null : $form->getValues()["phone"]
+                empty($form->getValues()["phone"]) ? null : $form->getValues()["phone"],
+                $options
             );
 
             $this->message = $options["success"];
@@ -71,7 +72,7 @@ class Factory
         return $form;
     }
 
-    private function send($id, $from, $to, $subject, $message, $phone)
+    private function send($id, $from, $to, $subject, $message, $phone, $options)
     {
         Debugger::log("Contact form - " . json_encode([$id, $from, $to, $subject, $message, $phone]), "mail");
 
@@ -85,7 +86,8 @@ class Factory
                     __DIR__ . '/templates/default.latte',
                     [
                         "message" => $message,
-                        "phone" => $phone
+                        "phone" => $phone,
+                        "options" => $options
                     ]
                 )
             );
