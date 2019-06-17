@@ -1,5 +1,5 @@
 {
-	"name": "webby/extension-contact-form",
+	"name": "bauer01/webby-extension-contact-form",
 	"type": "webby-extension",
 	"description": "Contact form extension for Webby CMS",
 	"keywords": ["webby","plugin","extension","contact","form"],
